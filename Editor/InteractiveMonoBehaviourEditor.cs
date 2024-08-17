@@ -63,6 +63,8 @@ namespace vwgamedev.GameCreator.Editor
             AddPropertyToContainer(basicEventsContainer, "m_OnBeforeStop");
             basicEventsContainer.Add(new Label("On Stop:"));
             AddPropertyToContainer(basicEventsContainer, "m_OnStop");
+            basicEventsContainer.Add(new Label("On Fail:"));
+            AddPropertyToContainer(basicEventsContainer, "m_OnFail");
 
             return root;
         }
@@ -121,7 +123,8 @@ namespace vwgamedev.GameCreator.Editor
                     iterator.propertyPath != "m_OnBeforeInteract" &&
                     iterator.propertyPath != "m_OnInteract" &&
                     iterator.propertyPath != "m_OnBeforeStop" &&
-                    iterator.propertyPath != "m_OnStop")
+                    iterator.propertyPath != "m_OnStop" &&
+                    iterator.propertyPath != "m_OnFail")
                 {
                     PropertyField propertyField = new PropertyField(iterator);
                     container.Add(propertyField);  // Add the field to the specific container

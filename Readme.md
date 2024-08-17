@@ -31,14 +31,15 @@ This extension requires the following assets to be installed in your project:
 I totally recommend to use the GameCreator2 Visual Scripting for most of the things. But when it comes to more complex interactions, like entering a vehicle, it can get very complex and hard to maintain (at least for me). I often find myself in the situation, where i think some complex task would be much easier and cleaner to implement in code. For me that are things like vehicles and workbenches.
 
 ## ⚡ InteractiveMonoBehaviour
-The InteractiveMonoBehaviour is meant to be used as a base class for interactive objects. It hooks into the GameCreator2 Interaction System and let the player Interact with it. While it's custom inspector has 4 different Instruction fields, it is meant to be extended by code. A simple and working example for NWH Vehicle Physics can be this:
+![InteractiveMonoBehaviour](".GithubDocumentation~/Inspector_01.png")
+
+The InteractiveMonoBehaviour is meant to be used as a base class for interactive objects. It hooks into the GameCreator2 Interaction System and let the player Interact with it. While it's custom inspector has 4 different Instruction fields, it is meant to be extended by code. The InteractiveMonoBehaviour also still shows your custom properties in the Custom Inspector, but will organize them in a foldout.
+A simple and working example for NWH Vehicle Physics can be this:
 ```csharp
 public class InteractiveVehicle : InteractiveMonoBehaviour
 {
-    private VehicleController _vehicleController;
-    void Awake(){
-        _vehicleController = GetComponent<VehicleController>();
-    }
+    [SerializeField] private VehicleController _vehicleController;
+    
     public OnInteract(){
         _vehicleController.Inputs.SetAutoInput(true);
         await InteractiveUtility.WaitForInput(KeyCode.E);
@@ -49,7 +50,9 @@ public class InteractiveVehicle : InteractiveMonoBehaviour
     }
 }
 ```
-You don't need more than this, to make a vehicle interactive. The Custom Inspector of the InteractiveMonoBehaviour will let you assign a Marker and a custom Character State. The Character will move to the Marker and if reached, the character will enter the State. If the State has a Entry Animation, it will be played and after that entry animation the OnInteract() method will be called. This way it is very easy to let a character first walk to a car door, enter the car and then overtaking the controlls. The same procedure will be done when the character stops the interaction.
+*You don't need more than this, to make a vehicle interactive.*
+
+The Custom Inspector of the InteractiveMonoBehaviour will let you assign a Marker and a custom Character State. The Character will move to the Marker and if reached, the character will enter the State. If the State has a Entry Animation, it will be played and after that entry animation the OnInteract() method will be called. This way it is very easy to let a character first walk to a car door, enter the car and then overtaking the controlls. The same procedure will be done when the character stops the interaction.
 ### 🔌 Methods
 The InteractiveMonoBehaviour has 4 different states, which we can hook into with our code.
 - **OnBeforeInteract(Character character)** - Called when the character has reached the Marker.
