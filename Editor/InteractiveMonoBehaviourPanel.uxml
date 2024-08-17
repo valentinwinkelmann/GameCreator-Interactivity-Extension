@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Plugins/vwgamedev/GameCreator/Editor/InteractiveMonoBehaviourPanel.uss?fileID=7433441132597879392&amp;guid=f6820bbab392c914996bb75c6d9946cb&amp;type=3#InteractiveMonoBehaviourPanel" />
+    <ui:Foldout text="Basic Settings" name="BasicSettingsFoldout" class="Foldout" style="-unity-font-style: normal;">
+        <ui:VisualElement name="BasicSettings" class="Foldout-Content">
+            <ui:VisualElement style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </ui:Foldout>
+    <ui:Foldout text="Basic Events" name="BasicEventsFoldout" class="Foldout" style="-unity-font-style: normal;">
+        <ui:VisualElement name="BasicEvents" class="Foldout-Content">
+            <ui:VisualElement style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </ui:Foldout>
+    <ui:Foldout text="Component Settings" name="ComponentSettingsFoldout" class="Foldout">
+        <ui:VisualElement name="ComponentSettings" class="Foldout-Content" style="flex-grow: 1;" />
+    </ui:Foldout>
+</ui:UXML>

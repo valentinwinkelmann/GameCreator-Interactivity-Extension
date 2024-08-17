@@ -1,0 +1,18 @@
+{
+    "name": "com.vwgamedev.gamecreator-interactivity-extension",
+    "rootNamespace": "",
+    "references": [
+        "GUID:406c89e0bc84d48f4b079c3c4cd13320",
+        "GUID:6d4810c931e638d489b58e9b332f3fb9",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
