@@ -31,7 +31,7 @@ This extension requires the following assets to be installed in your project:
 I totally recommend to use the GameCreator2 Visual Scripting for most of the things. But when it comes to more complex interactions, like entering a vehicle, it can get very complex and hard to maintain (at least for me). I often find myself in the situation, where i think some complex task would be much easier and cleaner to implement in code. For me that are things like vehicles and workbenches.
 
 ## ⚡ InteractiveMonoBehaviour
-![InteractiveMonoBehaviour](".GithubDocumentation~/Inspector_01.png")
+![InteractiveMonoBehaviour]("/.GithubDocumentation~/Inspector_01.png")
 
 The InteractiveMonoBehaviour is meant to be used as a base class for interactive objects. It hooks into the GameCreator2 Interaction System and let the player Interact with it. While it's custom inspector has 4 different Instruction fields, it is meant to be extended by code. The InteractiveMonoBehaviour also still shows your custom properties in the Custom Inspector, but will organize them in a foldout.
 A simple and working example for NWH Vehicle Physics can be this:
@@ -39,7 +39,7 @@ A simple and working example for NWH Vehicle Physics can be this:
 public class InteractiveVehicle : InteractiveMonoBehaviour
 {
     [SerializeField] private VehicleController _vehicleController;
-    
+
     public OnInteract(){
         _vehicleController.Inputs.SetAutoInput(true);
         await InteractiveUtility.WaitForInput(KeyCode.E);
