@@ -27,6 +27,8 @@ This extension requires the following assets to be installed in your project:
 - [GameCreator2](https://assetstore.unity.com/packages/tools/game-toolkits/game-creator-2-203069)
 - [Final IK](https://assetstore.unity.com/packages/tools/animation/final-ik-14290)
 
+***Note:** Final IK dont import its .asmdef file by default, you first have to unpack it from ```Assets/Plugins/RootMotion/Import Assembly Definitions.unitypackage```* 
+
 ## ❓ Why not just use the GameCreator2 Visual Scripting?
 I totally recommend to use the GameCreator2 Visual Scripting for most of the things. But when it comes to more complex interactions, like entering a vehicle, it can get very complex and hard to maintain (at least for me). I often find myself in the situation, where i think some complex task would be much easier and cleaner to implement in code. For me that are things like vehicles and workbenches.
 
@@ -55,6 +57,7 @@ public class InteractiveVehicle : InteractiveMonoBehaviour
 The Custom Inspector of the InteractiveMonoBehaviour will let you assign a Marker and a custom Character State. The Character will move to the Marker and if reached, the character will enter the State. If the State has a Entry Animation, it will be played and after that entry animation the OnInteract() method will be called. This way it is very easy to let a character first walk to a car door, enter the car and then overtaking the controlls. The same procedure will be done when the character stops the interaction.
 ### 🔌 Methods
 ![InteractiveMonoBehaviour](/.GithubDocumentation~/Inspector_02.png)
+
 The InteractiveMonoBehaviour has 4 different states, which we can hook into with our code.
 - **OnBeforeInteract(Character character)** - Called when the character has reached the Marker.
 - **OnInteract(Character character)** - Called when the character has finished the Entry Animation.
