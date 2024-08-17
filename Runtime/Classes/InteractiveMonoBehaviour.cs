@@ -141,9 +141,9 @@ namespace vwgamedev.GameCreator{
                 await InteractiveUtility.WaitForEnterState(character, this.CharacterState);
             }
 
-
-            InteractiveReflectionUtility.InvokeMethod(this, ref onInteractMethod, "OnInteract", this.m_Character);
             await this.m_OnInteract.Run(new Args(character.gameObject));
+            InteractiveReflectionUtility.InvokeMethod(this, ref onInteractMethod, "OnInteract", this.m_Character);
+            
         }
 
         async void IInteractive.Stop()
