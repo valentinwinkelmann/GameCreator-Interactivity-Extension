@@ -29,8 +29,6 @@ namespace vwgamedev.GameCreator{
                 }
                 type = type.BaseType;
             }
-
-            //Debug.LogWarning($"Method '{methodName}' not found in the inheritance hierarchy. Make sure the method is public.");
             return null;
         }
     }

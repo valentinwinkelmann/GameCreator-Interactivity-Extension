@@ -10,15 +10,15 @@ namespace  vwgamedev.GameCreator{
     [Title("Stop Interaction")]
     [Description("This Instruction stops the interaction of a character and an InteractiveMonoBehaviour")]
 
-    [Category("Characters/Interaction/Stop Interaction")]
+    [Category("Characters/Interaction/Interactivity Extension/Stop Interaction")]
     
     [Parameter("Character", "The character that whichs interaction will be stopped, if used within a InteractiveMonoBehaviour Instruction, keep it on self")]
 
     [Keywords("Interact", "Interactive", "Character")]
     
-    [Image(typeof(IconCharacterInteract), ColorTheme.Type.Red)]
+    [Image(typeof(IconCharacterInteract), ColorTheme.Type.Red, typeof(OverlayCross))]
     
-        [Serializable]
+    [Serializable]
     public class InstructionStopInteraction : Instruction
     {
         [SerializeField] private PropertyGetGameObject m_Character = GetGameObjectSelf.Create();
@@ -27,9 +27,8 @@ namespace  vwgamedev.GameCreator{
             Character character = this.m_Character.Get(args).GetComponent<Character>();
             if(character == null) return Task.CompletedTask;
 
-            InteractiveAnimator interactive = character.Animim.Animator.transform.gameObject.GetComponent<InteractiveAnimator>();
-            if(interactive == null) return Task.CompletedTask;
-            //...
+            InteractionIKRig interactiveRig = character.IK.RequireRig<InteractionIKRig>();
+            interactiveRig.StopInteraction();
             return Task.CompletedTask;
 
         }

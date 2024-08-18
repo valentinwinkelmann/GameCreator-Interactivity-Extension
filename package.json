@@ -1,6 +1,6 @@
 {
     "name": "com.vwgamedev.gamecreator-interactivity-extension",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "displayName": "GameCreator Interactivity Extension",
     "description": "This extension adds a new way to make interactive objects. It was designed to make it easiert to implement vehicles and extend existing third party assets like NWH Vehicle Physics or Edy's Vehicle Physics. But it can be used for any other kind of interactive object like Chairs, Beds, Workbenches, Chests and so on. It is Currently in a Work in Progress state and should be used with caution.",
     "unity": "2022.1",

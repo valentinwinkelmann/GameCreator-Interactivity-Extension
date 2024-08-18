@@ -8,27 +8,15 @@ using GameCreator.Runtime.Common;
 /// - Remove all unnecessary code.
 /// - Check if every mode works, also without state, without mount and without marker.
 /// - Check if is working in AOT and IL2CPP platforms ( WebGL ).
-/// - Maybe rename the whole thing
-/// - Make FinalIK Optional by player compile symbols
-/// - Make it a Package structure and publish on Github
-/// - Making a refflection less version
+/// 
+/// - Make it optional per StateMarker if the character needs to be exactly on the marker, if not, tween the charachter while entering the state to the marker zero.
+/// This could be usefull if we have a StateMarker which let the player run to the interactor. e.g. running to a horse and jump on it from behind.
+
 namespace vwgamedev.GameCreator{
     /// <summary>
     /// This Behaviour is meant to be inherited from any component that should be interactable by a character.
     /// It works like the MonoBehaviour, but with the additional functionality of being interactable.
-    /// 
-    /// Limitations:
-    /// RootMotion will only work if the object where the character will be mounted on is static or kinematic.
-    /// While in RootMotion, the charachter can't be stay fixed to the objects position/rotation.
-    /// Best practice is to make vehicle static when starting the interaction and dynamic when the interaction is finished.
-    /// For Example OnBeforeInteract Set to Kinematic, and OnStop Set to Dynamic.
-    /// 
-    /// Following methods can be implemented to react to interactions:
-    /// - OnInteract(Character character)
-    /// - OnStop(Character character)
-    /// - OnFail(CancelReason reason)
-    /// - OnBeforeInteract(Character character) // starts when the character starts entering the State, usefull for animation or kinematic changes
-    /// - OnBeforeStop(Character character) // starts when the character starts leaving the State usefull for animations
+    /// Please read the Documentation on GitHub for more information.
     /// </summary>
     public class InteractiveMonoBehaviour : MonoBehaviour, IInteractive, ISpatialHash
     {
@@ -36,9 +24,8 @@ namespace vwgamedev.GameCreator{
         [SerializeField] private PropertyGetBool m_CharacterBusy = new PropertyGetBool(false);
         [SerializeField] private PropertyGetBool m_CharacterControllable = new PropertyGetBool(false);
         [SerializeField] private PropertyGetBool m_CharacterMount = new PropertyGetBool(false);
-        [SerializeField] private PropertyGetLocation m_CharacterLocation = GetLocationNavigationMarker.Create;
-        [SerializeField] private PropertyGetGameObject m_MountObject = new PropertyGetGameObject();
-        [SerializeField] private State m_CharacterState = null;
+        [SerializeField] private LayerMask m_MarkerOverlapLayer = ~0;
+        [SerializeField] private InteractiveStateMarker[] m_CharacterStateMarkers = null;
         [SerializeField] private Transform[] m_CharacterIKPoints = null;
 
         [SerializeField] private RunInstructionsList m_OnBeforeInteract = new RunInstructionsList();
@@ -51,9 +38,8 @@ namespace vwgamedev.GameCreator{
         protected virtual bool CharacterBusy => m_CharacterBusy.Get(this.Args);
         protected virtual bool CharacterControllable => m_CharacterControllable.Get(this.Args);
         protected virtual bool CharacterMount => m_CharacterMount.Get(this.Args);
-        protected virtual Location CharacterLocation => m_CharacterLocation.Get(this.Args);
-        protected virtual GameObject MountObject => m_MountObject.Get(this.Args);
-        protected virtual State CharacterState => m_CharacterState;
+        protected virtual InteractiveStateMarker[] CharacterStateMarkers => m_CharacterStateMarkers;
+        private LayerMask MarkerOverlapLayer => m_MarkerOverlapLayer;
         protected virtual Transform[] CharacterIKPoints => m_CharacterIKPoints;
         
         [NonSerialized] private Vector3 m_LastPosition;
@@ -88,11 +74,11 @@ namespace vwgamedev.GameCreator{
             SpatialHashInteractions.Remove(this);
         }
         private void Update(){
-            // if(this.m_Character != null && this.freezeCharacterControler){
-            //     this.m_Character.Motion.LinearSpeed = 0;
-            //     this.m_Character.Motion.AngularSpeed = 0;
-            //     this.m_Character.Motion.TerminalVelocity = 0;
-            // }
+            if(this.m_Character != null && this.freezeCharacterControler){
+                this.m_Character.Motion.LinearSpeed = 0;
+                this.m_Character.Motion.AngularSpeed = 0;
+                this.m_Character.Motion.TerminalVelocity = 0;
+            }
             if(this.m_Character != null){
                 this.m_Character.Animim.Animator.SetFloat("Grounded", 1f); // Every player should be grounded while interacting no matter what the physics say
             }
@@ -113,29 +99,45 @@ namespace vwgamedev.GameCreator{
 
             this.m_IsInteracting = true;
             this.m_Character = character;
+            
+            // if(!await InteractiveUtility.WaitForNavigation(character, this.CharacterLocation)){ // If the character can't reach the marker, cancel the interaction
+            //     InteractionCancel(CancelReason.NotReachable);
+            //     return;
+            // }
 
-            if(!await InteractiveUtility.WaitForNavigation(character, this.CharacterLocation)){ // If the character can't reach the marker, cancel the interaction
+            InteractiveStateMarker nearestMarker = InteractiveUtility.GetNearestStateMarker(this.CharacterStateMarkers, character, MarkerOverlapLayer);
+                if(nearestMarker != null){
+                    Location markerLocation = new Location(nearestMarker.marker);
+                    if(!await InteractiveUtility.WaitForNavigation(character, markerLocation)){
+                        InteractionCancel(CancelReason.NotReachable);
+                        return;
+                    }
+                }
+            if(nearestMarker == null){
                 InteractionCancel(CancelReason.NotReachable);
                 return;
             }
-            UnityAnimatorIKRig unityAnimatorIK = character.IK.GetRig<UnityAnimatorIKRig>();
-            unityAnimatorIK?.instance.SetCharacterIKPoints(this.CharacterIKPoints);
 
 
-            // if (this.CharacterBusy) character.Busy.SetBusy();
+            InteractionIKRig interactiveIK = character.IK.RequireRig<InteractionIKRig>();
+            interactiveIK.instance.SetCharacterIKPoints(this.CharacterIKPoints);
+            interactiveIK.interactiveMonoBehaviour = this;
+
+
+            if (this.CharacterBusy) character.Busy.SetBusy();
             if (this.CharacterBusy) character.Busy.AddState(Busy.Limb.Legs);
             if (this.CharacterControllable) character.Player.IsControllable = false;
 
             if(this.CharacterMount){
 
-                await InteractiveUtility.WaitForMount(character, this.MountObject,0.5f, ref m_CharacterMotionValues);
+                await InteractiveUtility.WaitForMount(character, nearestMarker.marker.gameObject,0.5f, ref m_CharacterMotionValues);
             }
             InteractiveReflectionUtility.InvokeMethod(this, ref onBeforeInteractMethod, "OnBeforeInteract", this.m_Character);
             await this.m_OnBeforeInteract.Run(new Args(character.gameObject));
 
-            if(this.CharacterState != null){
-                unityAnimatorIK?.SetRootMotionOverride(true);
-                await InteractiveUtility.WaitForEnterState(character, this.CharacterState);
+            if(this.CharacterStateMarkers.Length > 0){
+                interactiveIK.SetRootMotionOverride(true);
+                await InteractiveUtility.WaitForEnterState(character, nearestMarker.state);
             }
 
             await this.m_OnInteract.Run(new Args(character.gameObject));
@@ -146,16 +148,16 @@ namespace vwgamedev.GameCreator{
         async void IInteractive.Stop()
         {
             if (!this.m_IsInteracting) return;
-            //this.freezeCharacterControler = true;
+            this.freezeCharacterControler = true;
             InteractiveReflectionUtility.InvokeMethod(this, ref onBeforeStopMethod, "OnBeforeStop", this.m_Character);
-            UnityAnimatorIKRig unityAnimatorIK = this.m_Character.IK.GetRig<UnityAnimatorIKRig>();
+            InteractionIKRig interactiveIK = this.m_Character.IK.RequireRig<InteractionIKRig>();
 
             await this.m_OnBeforeStop.Run(new Args(this.m_Character.gameObject));
-            if(this.CharacterState != null){
-                await InteractiveUtility.WaitForExitState(this.m_Character, this.CharacterState);
-                unityAnimatorIK?.SetRootMotionOverride(false);
+            if(this.CharacterStateMarkers.Length > 0){
+                await InteractiveUtility.WaitForExitState(this.m_Character, this.CharacterStateMarkers[0].state); // TODO: While in state, we have to check which state we should exit with and we have to instant set this state before exit
+                interactiveIK.SetRootMotionOverride(false);
             }
-            //this.freezeCharacterControler = false;
+            this.freezeCharacterControler = false;
             if(this.CharacterMount){
                 await InteractiveUtility.WaitForUnmount(this.m_Character, 0.25f, m_CharacterMotionValues);
             }
@@ -170,6 +172,7 @@ namespace vwgamedev.GameCreator{
 
             await InteractiveUtility.WaitForFrames(300);
             this.m_IsInteracting = false;
+            interactiveIK.interactiveMonoBehaviour = null;
             this.m_Character = null;
         }
 

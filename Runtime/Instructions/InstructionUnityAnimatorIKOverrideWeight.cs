@@ -10,7 +10,7 @@ namespace vwgamedev.GameCreator{
         [Title("Override Animator IK Weight")]
         [Description("Overrides the Unity Animator IK weight for a specific body part but keeps the target and rememer the original weight, if you set the override weight to 0, the original weight will be restored")]
 
-        [Category("Characters/IK/Override Unity Animator IK Weight")]
+        [Category("Characters/IK/Interactivity Extension/Override Unity Animator IK Weight")]
         
         [Parameter("Character", "The character that will get the IK weight override")]
         [Parameter("IK Goal", "The IK goal that will get the weight set")]
@@ -18,7 +18,7 @@ namespace vwgamedev.GameCreator{
 
         [Keywords("IK", "FinalIK", "Character", "Animation")]
         
-        [Image(typeof(IconCharacterInteract), ColorTheme.Type.Green, typeof(OverlayPlus))]
+        [Image(typeof(IconIK), ColorTheme.Type.Green, typeof(OverlayPlus))]
         
         [Serializable]
 

@@ -49,6 +49,8 @@ namespace vwgamedev.GameCreator.Editor
             AddPropertyToContainer(basicSettingsContainer, "m_CharacterLocation");
             AddPropertyToContainer(basicSettingsContainer, "m_CharacterState");
             AddPropertyToContainer(basicSettingsContainer, "m_CharacterIKPoints");
+            AddPropertyToContainer(basicSettingsContainer, "m_CharacterStateMarkers");
+            AddPropertyToContainer(basicSettingsContainer, "m_MarkerOverlapLayer");
 
             // Fill in the Component Settings container if there are derived properties
             bool hasDerivedProperties = DrawDerivedClassFields(componentSettingsContainer);
@@ -119,6 +121,8 @@ namespace vwgamedev.GameCreator.Editor
                     iterator.propertyPath != "m_MountObject" &&
                     iterator.propertyPath != "m_CharacterLocation" &&
                     iterator.propertyPath != "m_CharacterState" &&
+                    iterator.propertyPath != "m_CharacterStateMarkers" &&
+                    iterator.propertyPath != "m_MarkerOverlapLayer" &&
                     iterator.propertyPath != "m_CharacterIKPoints" &&
                     iterator.propertyPath != "m_OnBeforeInteract" &&
                     iterator.propertyPath != "m_OnInteract" &&

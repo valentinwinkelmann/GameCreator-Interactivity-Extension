@@ -6,21 +6,27 @@ using GameCreator.Runtime.Characters.IK;
 
 namespace vwgamedev.GameCreator
 {
-    [Title("Unity Animator IK Rig")]
-    [Category("Unity Animator IK Rig")]
+    [Title("Interaction IK Rig")]
+    [Category("Interaction IK Rig")]
 
     [Image(typeof(IconIK), ColorTheme.Type.Green)]
-    [Description("Custom IK rig using Unity's OnAnimatorIK method")]
+    [Description("This rig is used by the InteractionMonoBehaviour")]
 
     [Serializable]
-    public class UnityAnimatorIKRig : TRigAnimatorIK
+    public class InteractionIKRig : TRigAnimatorIK
     {
         private InteractiveAnimator interactiveAnimator;
+
+
+        [NonSerialized,HideInInspector]
+        public InteractiveMonoBehaviour interactiveMonoBehaviour;
 
         public override string Title => "Unity Animator IK Rig";
         public override string Name => "UnityAnimatorIKRig";
         public override bool RequiresHuman => true;
         public override bool DisableOnBusy => true;
+        
+        private Character m_Character = null;
 
         protected override void DoStartup(Character character)
         {
@@ -32,6 +38,7 @@ namespace vwgamedev.GameCreator
             {
                 interactiveAnimator = animator.gameObject.AddComponent<InteractiveAnimator>();
             }
+            this.m_Character = character;
         }
 
         protected override void DoEnable(Character character)
@@ -183,6 +190,10 @@ namespace vwgamedev.GameCreator
             {
                 interactiveAnimator.RootMotionOverride = enable;
             }
+        }
+        public void StopInteraction(){
+            if(interactiveMonoBehaviour == null) return;
+            interactiveMonoBehaviour.InteractionStop();
         }
         public InteractiveAnimator instance => interactiveAnimator;
     }

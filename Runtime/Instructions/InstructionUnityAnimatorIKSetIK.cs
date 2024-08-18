@@ -10,7 +10,7 @@ namespace vwgamedev.GameCreator{
         [Title("Set Animator IK")]
         [Description("Set the Unity Animator IK weight and Target for a specific body part. If IK Target is not set, the weight will be set to its current IK Target")]
 
-        [Category("Characters/IK/Set Unity Animator IK")]
+        [Category("Characters/IK/Interactivity Extension/Set Unity Animator IK")]
         
         [Parameter("Character", "The character that will get the IK set")]
         [Parameter("IK Goal", "The IK goal that will get set")]
@@ -38,7 +38,7 @@ namespace vwgamedev.GameCreator{
             Transform target = this.m_IKTarget.Get(args).transform;
             float weight = (float)this.m_Weight.Get(args);
             
-            UnityAnimatorIKRig rig = character.IK.GetRig<UnityAnimatorIKRig>();
+            InteractionIKRig rig = character.IK.GetRig<InteractionIKRig>();
             if (rig == null) return Task.CompletedTask;
 
             

@@ -10,7 +10,7 @@ namespace  vwgamedev.GameCreator{
     [Title("Interact with Interactive")]
     [Description("This instruction forces a character to interact with an interactive object")]
 
-    [Category("Characters/Interaction/Interact with Interactive")]
+    [Category("Characters/Interaction/Interactivity Extension/Interact with Interactive")]
     
     [Parameter("Character", "The character that will interact with the interactive object")]
     [Parameter("Interactive", "The interactive object that will be interacted with, must implement IInteractive")]

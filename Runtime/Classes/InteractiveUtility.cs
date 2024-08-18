@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -199,6 +200,67 @@ public static class InteractiveUtility
             character.GetComponent<CharacterController>().detectCollisions = true;
             character.GetComponent<CharacterController>().enabled = true;
         }
+
+        
+        public static InteractiveStateMarker GetNearestStateMarker(InteractiveStateMarker[] characterStateMarkers, Character character, LayerMask layerMask)
+        {
+            if (characterStateMarkers.Length == 1)
+            {
+                // If there's only one marker, check conditions and reachability
+                if (IsValidMarker(characterStateMarkers[0], character))
+                {
+                    return characterStateMarkers[0];
+                }
+                return null; // Return null if the single marker doesn't pass the checks
+            }
+
+            InteractiveStateMarker nearestMarker = null;
+            float nearestDistance = float.MaxValue;
+
+            foreach (InteractiveStateMarker marker in characterStateMarkers)
+            {
+                // Check if the marker conditions are met before evaluating distance
+                if (!IsValidMarker(marker, character))
+                {
+                    continue;
+                }
+
+                // Calculate the distance between the marker and the character
+                float distance = Vector3.Distance(marker.marker.transform.position, character.transform.position);
+
+                // Check if this marker is closer than the previous nearest one
+                if (distance < nearestDistance && IsMarkerReachable(marker, character, layerMask))
+                {
+                    nearestDistance = distance;
+                    nearestMarker = marker;
+                }
+            }
+
+            return nearestMarker;
+            }
+
+            private static bool IsValidMarker(InteractiveStateMarker marker, Character character)
+            {
+                // Check the conditions directly
+                bool conditionsMet = marker.runConditionsList.Check(new Args(character));
+
+                // If the conditions are not met, ignore this marker
+                return conditionsMet;
+            }
+
+            private static bool IsMarkerReachable(InteractiveStateMarker marker, Character character, LayerMask layerMask)
+            {
+                // Calculate the position to check, applying the offset to the y-axis
+                Vector3 positionToCheck = marker.marker.transform.position + Vector3.up;
+
+                // Perform the overlap sphere check
+                Collider[] hitColliders = Physics.OverlapSphere(positionToCheck, 0.5f, layerMask);
+
+                // If any collider is found, the marker is blocked
+                return hitColliders.Length == 0;
+            }
+
+
 
 
     }

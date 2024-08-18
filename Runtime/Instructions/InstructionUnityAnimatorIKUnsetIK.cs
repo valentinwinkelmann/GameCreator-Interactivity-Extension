@@ -10,7 +10,7 @@ namespace vwgamedev.GameCreator{
         [Title("Unset Animator IK")]
         [Description("Unset the Unity Animator IK for a specific body part.")]
 
-        [Category("Characters/IK/Unset Unity Animator IK")]
+        [Category("Characters/IK/Interactivity Extension/Unset Unity Animator IK")]
         
         [Parameter("Character", "The character that will get the IK unset")]
         [Parameter("IK Goal", "The IK goal that will get unset")]
@@ -32,7 +32,7 @@ namespace vwgamedev.GameCreator{
             Character character = this.m_Character.Get(args).GetComponent<Character>();
             if (character == null) return Task.CompletedTask;
             
-            UnityAnimatorIKRig rig = character.IK.GetRig<UnityAnimatorIKRig>();
+            InteractionIKRig rig = character.IK.GetRig<InteractionIKRig>();
             if (rig == null) return Task.CompletedTask;
 
             rig.UnsetIKGoal(m_IKGoal);
