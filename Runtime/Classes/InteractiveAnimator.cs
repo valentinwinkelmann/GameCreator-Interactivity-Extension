@@ -1,6 +1,6 @@
 using UnityEngine;
 using GameCreator.Runtime.Characters;
-using RootMotion.FinalIK;
+using System.Collections.Generic;
 
 namespace vwgamedev.GameCreator
 {
@@ -10,24 +10,21 @@ namespace vwgamedev.GameCreator
         private Animator animator;
         public Character character;
 
-        public InteractiveMonoBehaviour interactiveMonoBehaviour;
+        private List<Transform> characterIKPoints = new List<Transform>();
 
         // IK Multipliers (0f-1f) to allow to temporarily disable IK for a specific body part, e.g. when the character is aiming.
-        
-        [Range(0f, 1f)]public float LeftArmMultiplier = 1;
-        [Range(0f, 1f)]public float RightArmMultiplier = 1;
-        [Range(0f, 1f)]public float LeftLegMultiplier = 1;
-        [Range(0f, 1f)]public float RightLegMultiplier = 1;
-        [Range(0f, 1f)]public float BodyMultiplier = 1;
-
-        private FullBodyBipedIK ik;
+        [Range(0f, 1f)] public float LeftArmMultiplier = 1;
+        [Range(0f, 1f)] public float RightArmMultiplier = 1;
+        [Range(0f, 1f)] public float LeftLegMultiplier = 1;
+        [Range(0f, 1f)] public float RightLegMultiplier = 1;
+        [Range(0f, 1f)] public float BodyMultiplier = 1;
 
         // IK Weights which are controlled internally by animation events
-        private float leftArmWeight = 0;
-        private float rightArmWeight = 0;
-        private float leftLegWeight = 0;
-        private float rightLegWeight = 0;
-        private float bodyWeight = 0;
+        [SerializeField]private float leftArmWeight = 0;
+        [SerializeField]private float rightArmWeight = 0;
+        [SerializeField]private float leftLegWeight = 0;
+        [SerializeField]private float rightLegWeight = 0;
+        [SerializeField]private float bodyWeight = 0;
 
         // Target weights for smooth transitions
         private float targetLeftArmWeight = 0;
@@ -36,16 +33,15 @@ namespace vwgamedev.GameCreator
         private float targetRightLegWeight = 0;
         private float targetBodyWeight = 0;
 
-        public void DestroyHelper()
-        {
-            Destroy(this);
-        }
+        public Transform leftHandTarget;
+        public Transform rightHandTarget;
+        public Transform leftFootTarget;
+        public Transform rightFootTarget;
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
             character = this.transform.parent.parent.GetComponent<Character>();
-            ik = GetComponent<FullBodyBipedIK>();
         }
 
         private void Update()
@@ -54,6 +50,7 @@ namespace vwgamedev.GameCreator
             {
                 return;
             }
+
             if (animator != null && RootMotionOverride)
             {
                 character.transform.position += character.Animim.RootMotionDeltaPosition;
@@ -67,82 +64,91 @@ namespace vwgamedev.GameCreator
             targetLeftLegWeight = Mathf.Lerp(targetLeftLegWeight, leftLegWeight * LeftLegMultiplier, lerpSpeed);
             targetRightLegWeight = Mathf.Lerp(targetRightLegWeight, rightLegWeight * RightLegMultiplier, lerpSpeed);
             targetBodyWeight = Mathf.Lerp(targetBodyWeight, bodyWeight * BodyMultiplier, lerpSpeed);
-
-            UpdateIKWeights();
         }
 
-        private void UpdateIKWeights()
+        private void OnAnimatorIK(int layerIndex)
         {
-            if (ik != null)
-            {
-                UpdateEffectorWeights(ik.solver.leftHandEffector, targetLeftArmWeight);
-                UpdateEffectorWeights(ik.solver.rightHandEffector, targetRightArmWeight);
-                UpdateEffectorWeights(ik.solver.leftFootEffector, targetLeftLegWeight);
-                UpdateEffectorWeights(ik.solver.rightFootEffector, targetRightLegWeight);
-                UpdateEffectorWeights(ik.solver.bodyEffector, targetBodyWeight);
-            }
-        }
+            if (animator == null) return;
 
-        private void UpdateEffectorWeights(IKEffector effector, float weight)
-        {
-            if (effector.target != null)
+            // Update hand IK
+            if (leftHandTarget != null)
             {
-                effector.positionWeight = weight;
-                effector.rotationWeight = weight;
+                animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, targetLeftArmWeight);
+                animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, targetLeftArmWeight);
+                animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandTarget.position);
+                animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandTarget.rotation);
             }
-            else
+
+            if (rightHandTarget != null)
             {
-                effector.positionWeight = 0;
-                effector.rotationWeight = 0;
+                animator.SetIKPositionWeight(AvatarIKGoal.RightHand, targetRightArmWeight);
+                animator.SetIKRotationWeight(AvatarIKGoal.RightHand, targetRightArmWeight);
+                animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandTarget.position);
+                animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandTarget.rotation);
+            }
+
+            // Update foot IK
+            if (leftFootTarget != null)
+            {
+                animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, targetLeftLegWeight);
+                animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, targetLeftLegWeight);
+                animator.SetIKPosition(AvatarIKGoal.LeftFoot, leftFootTarget.position);
+                animator.SetIKRotation(AvatarIKGoal.LeftFoot, leftFootTarget.rotation);
+            }
+
+            if (rightFootTarget != null)
+            {
+                animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, targetRightLegWeight);
+                animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, targetRightLegWeight);
+                animator.SetIKPosition(AvatarIKGoal.RightFoot, rightFootTarget.position);
+                animator.SetIKRotation(AvatarIKGoal.RightFoot, rightFootTarget.rotation);
             }
         }
 
         public void IK(string s)
         {
-            if (interactiveMonoBehaviour != null && ik != null)
-            {
+            Debug.Log("Recive Animator Event: " + s);
                 var splitStrings = s.Split('_');
                 string transformString = splitStrings[0];
                 string ikGoalString = splitStrings[1];
 
-                Transform transform = null;
-                var ikPoints = interactiveMonoBehaviour.GetCharacterIKPoints();
+                Transform targetTransform = null;
+                var ikPoints = characterIKPoints.ToArray();
                 if (ikPoints != null)
                 {
                     for (int i = 0; i < ikPoints.Length; i++)
                     {
                         if (ikPoints[i].name == transformString)
                         {
-                            transform = ikPoints[i];
+                            targetTransform = ikPoints[i];
                             break;
                         }
                     }
                 }
 
-                if (transform == null) return;
-
+                if (targetTransform == null) return;
+                Debug.Log("IK: " + transformString + " " + ikGoalString + " " + targetTransform.position);
                 switch (ikGoalString)
                 {
                     case "LeftHand":
-                        ik.solver.leftHandEffector.target = transform;
+                        leftHandTarget = targetTransform;
                         leftArmWeight = leftArmWeight == 1f ? 0f : 1f;
                         break;
                     case "RightHand":
-                        ik.solver.rightHandEffector.target = transform;
+                        rightHandTarget = targetTransform;
                         rightArmWeight = rightArmWeight == 1f ? 0f : 1f;
                         break;
                     case "LeftFoot":
-                        ik.solver.leftFootEffector.target = transform;
+                        leftFootTarget = targetTransform;
                         leftLegWeight = leftLegWeight == 1f ? 0f : 1f;
                         break;
                     case "RightFoot":
-                        ik.solver.rightFootEffector.target = transform;
+                        rightFootTarget = targetTransform;
                         rightLegWeight = rightLegWeight == 1f ? 0f : 1f;
                         break;
                     default:
                         return;
                 }
-            }
         }
 
         // This method allows external scripts to set the weight directly, typically from animation events.
@@ -167,13 +173,45 @@ namespace vwgamedev.GameCreator
                     break;
             }
         }
+        public void ResetIK()
+        {
+            leftHandTarget = null;
+            rightHandTarget = null;
+            leftFootTarget = null;
+            rightFootTarget = null;
+            leftArmWeight = 0;
+            rightArmWeight = 0;
+            leftLegWeight = 0;
+            rightLegWeight = 0;
+            bodyWeight = 0;
+            LeftArmMultiplier = 1;
+            RightArmMultiplier = 1;
+            LeftLegMultiplier = 1;
+            RightLegMultiplier = 1;
+            BodyMultiplier = 1;
+        }
+
+        public void SetCharacterIKPoints(Transform[] ikPoints)
+        {
+            characterIKPoints.Clear();
+            characterIKPoints.AddRange(ikPoints);
+        }
+        public void AddCharacterIKPoint(Transform ikPoint)
+        {
+            characterIKPoints.Add(ikPoint);
+        }
+        public void ClearCharacterIKPoints()
+        {
+            characterIKPoints.Clear();
+        }
+
     }
-    public enum IKGoal
-    {
-        LeftHand,
-        RightHand,
-        LeftFoot,
-        RightFoot,
-        Body
-    }
+        public enum IKGoal
+        {
+            LeftHand,
+            RightHand,
+            LeftFoot,
+            RightFoot,
+            Body
+        }
 }

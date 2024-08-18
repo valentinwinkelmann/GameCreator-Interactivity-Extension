@@ -4,6 +4,7 @@ using GameCreator.Runtime.Characters;
 using GameCreator.Runtime.Common;
 using GameCreator.Runtime.VisualScripting;
 using UnityEngine;
+namespace  vwgamedev.GameCreator{
 [Version(0, 0, 1)]
     
     [Title("Interact with Interactive")]
@@ -41,4 +42,5 @@ public class InstructionInteractWithInteractive : Instruction
             return Task.CompletedTask;
 
         }
+}
 }

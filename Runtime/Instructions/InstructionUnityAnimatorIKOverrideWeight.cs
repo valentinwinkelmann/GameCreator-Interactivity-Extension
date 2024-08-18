@@ -7,12 +7,12 @@ using UnityEngine;
 namespace vwgamedev.GameCreator{
     [Version(0, 0, 1)]
         
-        [Title("Set Final IK Weight")]
-        [Description("Set the weight of the Final IK")]
+        [Title("Override Animator IK Weight")]
+        [Description("Overrides the Unity Animator IK weight for a specific body part but keeps the target and rememer the original weight, if you set the override weight to 0, the original weight will be restored")]
 
-        [Category("Characters/FinalIK/Set Final IK Weight")]
+        [Category("Characters/IK/Override Unity Animator IK Weight")]
         
-        [Parameter("Character", "The character that will get the Final IK weight set")]
+        [Parameter("Character", "The character that will get the IK weight override")]
         [Parameter("IK Goal", "The IK goal that will get the weight set")]
         [Parameter("Weight", "The weight that will be set")]
 
@@ -22,7 +22,7 @@ namespace vwgamedev.GameCreator{
         
         [Serializable]
 
-    public class InstructionFinalIKSetWeight : Instruction
+    public class InstructionUnityAnimatorIKOverrideWeight : Instruction
     {
         [SerializeField] private PropertyGetGameObject m_Character = GetGameObjectPlayer.Create();
         [SerializeField] private IKGoal m_IKGoal = IKGoal.LeftHand;

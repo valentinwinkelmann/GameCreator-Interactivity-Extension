@@ -1,5 +1,4 @@
 using GameCreator.Runtime.Characters;
-using GameCreator.Runtime.Common;
 using UnityEngine;
 
 namespace vwgamedev.GameCreator{

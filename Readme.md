@@ -25,9 +25,6 @@ After that, the package will be downloaded and added to your project.
 ## 📦 Requirements
 This extension requires the following assets to be installed in your project:
 - [GameCreator2](https://assetstore.unity.com/packages/tools/game-toolkits/game-creator-2-203069)
-- [Final IK](https://assetstore.unity.com/packages/tools/animation/final-ik-14290)
-
-***Note:** Final IK dont import its .asmdef file by default, you first have to unpack it from ```Assets/Plugins/RootMotion/Import Assembly Definitions.unitypackage```* 
 
 ## ❓ Why not just use the GameCreator2 Visual Scripting?
 I totally recommend to use the GameCreator2 Visual Scripting for most of the things. But when it comes to more complex interactions, like entering a vehicle, it can get very complex and hard to maintain (at least for me). I often find myself in the situation, where i think some complex task would be much easier and cleaner to implement in code. For me that are things like vehicles and workbenches.
@@ -75,7 +72,7 @@ The InteractiveMonoBehaviour provides some propertis which are aviable in the Cu
 - **GameObject MountObject** - If set, the character will be mounted to this object instead of the Interactive Object.
 - **Location CharacterLocation** - If set, the character will move to this location instead of the Interactive Object.
 - **State CharacterState** - If set, the character will enter this state.
-- **Transform[] CharacterIKPoints** - Points which will be used for the Final IK Integration.
+- **Transform[] CharacterIKPoints** - Points which will be used for the IK Grab or Release.
 
 Every property can be set in the Custom Inspector or be overridden from code. If overriden from code, the Custom Inspectors value will be ignored. You can override it like this:
 ```csharp
@@ -86,9 +83,11 @@ public class InteractiveVehicle : InteractiveMonoBehaviour
 ```
 
 ### 🩻 IK Events
-The InteractiveMonoBehaviour provides a way to make the character grab or release IK Points from the **CharacterIKPoints** array. To do this, you have to add AnimationEvents to your Animation Clips.
-Just add an AnimationEvent with the name "IK" and give it a string parameter with the name of the IK Point followed by _LeftHand or _RightHand. You can also use _LeftFoor, _RightFoot or _Body. The Events work like a Toggle, so if you call it for the first time on that limb, the character will grab the IK Point. If you call it again, the character will release the IK Point. After the Interaction is stopped, all IK Points will automatically be released.
-You can of course also override the IK temprarily with a Custom Instruction called **Set Final IK Weight**. This way you can make the charachter release a Hand from the steering wheel to aim with a gun and after aim you call the **Set Final IK Weight** again to make the character grab the steering wheel again.
+The InteractiveMonoBehaviour provides a way to make the character grab or release IK Points from the **Override Animator IK Weight** array. To do this, you have to add AnimationEvents to your Animation Clips.
+Just add an AnimationEvent with the name ```IK``` and give it a string parameter with the name of the IK Point followed by ```_LeftHand``` or ```_RightHand```. You can also use ```_LeftFoot```, ```_RightFoot``` or ```_Body```. The Events work like a Toggle, so if you call it for the first time on that limb, the character will grab the IK Point. If you call it again, the character will release the IK Point. After the Interaction is stopped, all IK Points will automatically be released.
+You can of course also override the IK temporary with a Custom Instruction called **Override Animator IK Weight**. This way you can make the charachter release a Hand from the steering wheel to aim with a gun and after aim you call the **Set Final IK Weight** again to make the character grab the steering wheel again.
+
+![InteractiveMonoBehaviour](/.GithubDocumentation~/Inspector_03.png)
 
 
 ## 🛡️ AOT Safety

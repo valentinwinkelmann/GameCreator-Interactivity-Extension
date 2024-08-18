@@ -3,7 +3,6 @@ using System.Reflection;
 using UnityEngine;
 using GameCreator.Runtime.Characters;
 using GameCreator.Runtime.Common;
-using GameCreator.Runtime.VisualScripting;
 
 /// Todo:
 /// - Remove all unnecessary code.
@@ -89,11 +88,11 @@ namespace vwgamedev.GameCreator{
             SpatialHashInteractions.Remove(this);
         }
         private void Update(){
-            if(this.m_Character != null && this.freezeCharacterControler){
-                this.m_Character.Motion.LinearSpeed = 0;
-                this.m_Character.Motion.AngularSpeed = 0;
-                this.m_Character.Motion.TerminalVelocity = 0;
-            }
+            // if(this.m_Character != null && this.freezeCharacterControler){
+            //     this.m_Character.Motion.LinearSpeed = 0;
+            //     this.m_Character.Motion.AngularSpeed = 0;
+            //     this.m_Character.Motion.TerminalVelocity = 0;
+            // }
             if(this.m_Character != null){
                 this.m_Character.Animim.Animator.SetFloat("Grounded", 1f); // Every player should be grounded while interacting no matter what the physics say
             }
@@ -119,11 +118,9 @@ namespace vwgamedev.GameCreator{
                 InteractionCancel(CancelReason.NotReachable);
                 return;
             }
-            if(character.Animim.Animator.transform.gameObject.GetComponent<InteractiveAnimator>() != null){
-                character.Animim.Animator.transform.gameObject.GetComponent<InteractiveAnimator>().DestroyHelper();
-            }
-            InteractiveAnimator _interactiveAnimator = character.Animim.Animator.transform.gameObject.AddComponent<InteractiveAnimator>();
-            _interactiveAnimator.interactiveMonoBehaviour = this;
+            UnityAnimatorIKRig unityAnimatorIK = character.IK.GetRig<UnityAnimatorIKRig>();
+            unityAnimatorIK?.instance.SetCharacterIKPoints(this.CharacterIKPoints);
+
 
             // if (this.CharacterBusy) character.Busy.SetBusy();
             if (this.CharacterBusy) character.Busy.AddState(Busy.Limb.Legs);
@@ -137,7 +134,7 @@ namespace vwgamedev.GameCreator{
             await this.m_OnBeforeInteract.Run(new Args(character.gameObject));
 
             if(this.CharacterState != null){
-                _interactiveAnimator.RootMotionOverride = true;
+                unityAnimatorIK?.SetRootMotionOverride(true);
                 await InteractiveUtility.WaitForEnterState(character, this.CharacterState);
             }
 
@@ -149,15 +146,16 @@ namespace vwgamedev.GameCreator{
         async void IInteractive.Stop()
         {
             if (!this.m_IsInteracting) return;
-            this.freezeCharacterControler = true;
+            //this.freezeCharacterControler = true;
             InteractiveReflectionUtility.InvokeMethod(this, ref onBeforeStopMethod, "OnBeforeStop", this.m_Character);
+            UnityAnimatorIKRig unityAnimatorIK = this.m_Character.IK.GetRig<UnityAnimatorIKRig>();
+
             await this.m_OnBeforeStop.Run(new Args(this.m_Character.gameObject));
-            InteractiveAnimator _interactiveAnimator = this.m_Character.Animim.Animator.transform.gameObject.GetComponent<InteractiveAnimator>();
             if(this.CharacterState != null){
                 await InteractiveUtility.WaitForExitState(this.m_Character, this.CharacterState);
-                _interactiveAnimator.RootMotionOverride = false;
+                unityAnimatorIK?.SetRootMotionOverride(false);
             }
-            this.freezeCharacterControler = false;
+            //this.freezeCharacterControler = false;
             if(this.CharacterMount){
                 await InteractiveUtility.WaitForUnmount(this.m_Character, 0.25f, m_CharacterMotionValues);
             }
@@ -166,8 +164,6 @@ namespace vwgamedev.GameCreator{
 
             InteractiveReflectionUtility.InvokeMethod(this, ref onStopMethod, "OnStop", this.m_Character);
             await this.m_OnStop.Run(new Args(this.m_Character.gameObject));
-
-            _interactiveAnimator.DestroyHelper();
             
             if(this.CharacterBusy) this.m_Character.Busy.SetAvailable();
             if(this.CharacterControllable) this.m_Character.Player.IsControllable = true;
