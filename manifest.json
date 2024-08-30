@@ -1,0 +1,258 @@
+{
+  "sitemap": {
+    "baseUrl": "https://valentinwinkelmann.github.io/GameCreator-Interactivity-Extension/"
+  },
+  "source_base_path": "/home/runner/work/GameCreator-Interactivity-Extension/GameCreator-Interactivity-Extension/Documentation~",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "api/toc.json"
+        },
+        ".html": {
+          "relative_path": "api/toc.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.CancelReason.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.CancelReason.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.CharacterMotionValues.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.CharacterMotionValues.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.Editor.InteractiveMonoBehaviourEditor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.Editor.InteractiveMonoBehaviourEditor.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.Editor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.Editor.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.IKGoal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.IKGoal.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InstructionInteractWithInteractive.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InstructionInteractWithInteractive.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InstructionStopInteraction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InstructionStopInteraction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKOverrideWeight.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKOverrideWeight.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKSetIK.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKSetIK.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKUnsetIK.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKUnsetIK.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InteractionIKRig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InteractionIKRig.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InteractiveAnimator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InteractiveAnimator.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InteractiveMonoBehaviour.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InteractiveMonoBehaviour.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InteractiveReflectionUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InteractiveReflectionUtility.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InteractiveStateMarker.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InteractiveStateMarker.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InteractiveUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InteractiveUtility.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.InteractiveVehicle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.InteractiveVehicle.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.TweenTransform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.TweenTransform.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/vwgamedev.GameCreator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/vwgamedev.GameCreator.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

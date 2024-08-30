@@ -1,0 +1,107 @@
+{
+  "api/index.html": {
+    "href": "api/index.html",
+    "title": "| GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "This is the documentation for the Scripting APIs of this package."
+  },
+  "api/vwgamedev.GameCreator.CancelReason.html": {
+    "href": "api/vwgamedev.GameCreator.CancelReason.html",
+    "title": "Enum CancelReason | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Enum CancelReason Namespace vwgamedev.GameCreator public enum CancelReason Fields AlreadyInUse = 1 NotReachable = 0"
+  },
+  "api/vwgamedev.GameCreator.CharacterMotionValues.html": {
+    "href": "api/vwgamedev.GameCreator.CharacterMotionValues.html",
+    "title": "Struct CharacterMotionValues | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Struct CharacterMotionValues Namespace vwgamedev.GameCreator public struct CharacterMotionValues Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Fields AngularSpeed public float AngularSpeed Field Value float LinearSpeed public float LinearSpeed Field Value float TerminalVelocity public float TerminalVelocity Field Value float"
+  },
+  "api/vwgamedev.GameCreator.Editor.InteractiveMonoBehaviourEditor.html": {
+    "href": "api/vwgamedev.GameCreator.Editor.InteractiveMonoBehaviourEditor.html",
+    "title": "Class InteractiveMonoBehaviourEditor | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InteractiveMonoBehaviourEditor Namespace vwgamedev.GameCreator.Editor public class InteractiveMonoBehaviourEditor : UnityEditor.Editor Inheritance object InteractiveMonoBehaviourEditor Methods CreateInspectorGUI() public override VisualElement CreateInspectorGUI() Returns VisualElement"
+  },
+  "api/vwgamedev.GameCreator.Editor.html": {
+    "href": "api/vwgamedev.GameCreator.Editor.html",
+    "title": "Namespace vwgamedev.GameCreator.Editor | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Namespace vwgamedev.GameCreator.Editor Classes InteractiveMonoBehaviourEditor"
+  },
+  "api/vwgamedev.GameCreator.IKGoal.html": {
+    "href": "api/vwgamedev.GameCreator.IKGoal.html",
+    "title": "Enum IKGoal | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Enum IKGoal Namespace vwgamedev.GameCreator public enum IKGoal Fields Body = 4 LeftFoot = 2 LeftHand = 0 RightFoot = 3 RightHand = 1"
+  },
+  "api/vwgamedev.GameCreator.InstructionInteractWithInteractive.html": {
+    "href": "api/vwgamedev.GameCreator.InstructionInteractWithInteractive.html",
+    "title": "Class InstructionInteractWithInteractive | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InstructionInteractWithInteractive Namespace vwgamedev.GameCreator [Version] [Serializable] public class InstructionInteractWithInteractive : Instruction Inheritance object InstructionInteractWithInteractive Properties Title public override string Title { get; } Property Value string Methods Run(Args) protected override Task Run(Args args) Parameters args Args Returns Task"
+  },
+  "api/vwgamedev.GameCreator.InstructionStopInteraction.html": {
+    "href": "api/vwgamedev.GameCreator.InstructionStopInteraction.html",
+    "title": "Class InstructionStopInteraction | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InstructionStopInteraction Namespace vwgamedev.GameCreator [Version] [Serializable] public class InstructionStopInteraction : Instruction Inheritance object InstructionStopInteraction Methods Run(Args) protected override Task Run(Args args) Parameters args Args Returns Task"
+  },
+  "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKOverrideWeight.html": {
+    "href": "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKOverrideWeight.html",
+    "title": "Class InstructionUnityAnimatorIKOverrideWeight | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InstructionUnityAnimatorIKOverrideWeight Namespace vwgamedev.GameCreator [Version] [Serializable] public class InstructionUnityAnimatorIKOverrideWeight : Instruction Inheritance object InstructionUnityAnimatorIKOverrideWeight Methods Run(Args) protected override Task Run(Args args) Parameters args Args Returns Task"
+  },
+  "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKSetIK.html": {
+    "href": "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKSetIK.html",
+    "title": "Class InstructionUnityAnimatorIKSetIK | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InstructionUnityAnimatorIKSetIK Namespace vwgamedev.GameCreator [Version] [Serializable] public class InstructionUnityAnimatorIKSetIK : Instruction Inheritance object InstructionUnityAnimatorIKSetIK Properties Title public override string Title { get; } Property Value string Methods Run(Args) protected override Task Run(Args args) Parameters args Args Returns Task"
+  },
+  "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKUnsetIK.html": {
+    "href": "api/vwgamedev.GameCreator.InstructionUnityAnimatorIKUnsetIK.html",
+    "title": "Class InstructionUnityAnimatorIKUnsetIK | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InstructionUnityAnimatorIKUnsetIK Namespace vwgamedev.GameCreator [Version] [Serializable] public class InstructionUnityAnimatorIKUnsetIK : Instruction Inheritance object InstructionUnityAnimatorIKUnsetIK Properties Title public override string Title { get; } Property Value string Methods Run(Args) protected override Task Run(Args args) Parameters args Args Returns Task"
+  },
+  "api/vwgamedev.GameCreator.InteractionIKRig.html": {
+    "href": "api/vwgamedev.GameCreator.InteractionIKRig.html",
+    "title": "Class InteractionIKRig | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InteractionIKRig Namespace vwgamedev.GameCreator [Serializable] public class InteractionIKRig : TRigAnimatorIK Inheritance object InteractionIKRig Fields interactiveMonoBehaviour [NonSerialized] public InteractiveMonoBehaviour interactiveMonoBehaviour Field Value InteractiveMonoBehaviour Properties DisableOnBusy public override bool DisableOnBusy { get; } Property Value bool Name public override string Name { get; } Property Value string RequiresHuman public override bool RequiresHuman { get; } Property Value bool Title public override string Title { get; } Property Value string instance public InteractiveAnimator instance { get; } Property Value InteractiveAnimator Methods DoDisable(Character) protected override void DoDisable(Character character) Parameters character Character DoEnable(Character) protected override void DoEnable(Character character) Parameters character Character DoStartup(Character) protected override void DoStartup(Character character) Parameters character Character DoUpdate(Character) protected override void DoUpdate(Character character) Parameters character Character ResetIK() public void ResetIK() SetIKGoal(IKGoal, float, bool) Sets the IK weight for a specific body part public void SetIKGoal(IKGoal goal, float weight, bool force = false) Parameters goal IKGoal The body part to set the IK weight for weight float The weight to set force bool If true, also the multiplier will be set SetIKGoal(IKGoal, Transform, float, bool) Sets the IK target and weight for a specific body part public void SetIKGoal(IKGoal goal, Transform target, float weight, bool force = false) Parameters goal IKGoal The body part to set the IK target for target Transform The target transform to set weight float The weight to set force bool If true, also the multiplier will be set SetIKMultiplier(IKGoal, float) Sets the IK multiplier for a specific body part for overriding the weight public void SetIKMultiplier(IKGoal goal, float weight) Parameters goal IKGoal The body part to set the IK multiplier for weight float The weight to set SetRootMotionOverride(bool) Sets the RootMotionOverride mode which will make the character animate by the InteractiveAnimator, Usefull when the character is mounted. public void SetRootMotionOverride(bool enable) Parameters enable bool StopInteraction() public void StopInteraction() UnsetIKGoal(IKGoal) public void UnsetIKGoal(IKGoal goal) Parameters goal IKGoal"
+  },
+  "api/vwgamedev.GameCreator.InteractiveAnimator.html": {
+    "href": "api/vwgamedev.GameCreator.InteractiveAnimator.html",
+    "title": "Class InteractiveAnimator | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InteractiveAnimator Namespace vwgamedev.GameCreator public class InteractiveAnimator : MonoBehaviour Inheritance object InteractiveAnimator Fields BodyMultiplier public float BodyMultiplier Field Value float LeftArmMultiplier public float LeftArmMultiplier Field Value float LeftLegMultiplier public float LeftLegMultiplier Field Value float RightArmMultiplier public float RightArmMultiplier Field Value float RightLegMultiplier public float RightLegMultiplier Field Value float RootMotionOverride public bool RootMotionOverride Field Value bool character public Character character Field Value Character leftFootTarget public Transform leftFootTarget Field Value Transform leftHandTarget public Transform leftHandTarget Field Value Transform rightFootTarget public Transform rightFootTarget Field Value Transform rightHandTarget public Transform rightHandTarget Field Value Transform Methods AddCharacterIKPoint(Transform) public void AddCharacterIKPoint(Transform ikPoint) Parameters ikPoint Transform ClearCharacterIKPoints() public void ClearCharacterIKPoints() IK(string) public void IK(string s) Parameters s string ResetIK() public void ResetIK() SetCharacterIKPoints(Transform[]) public void SetCharacterIKPoints(Transform[] ikPoints) Parameters ikPoints Transform[] SetIKWeight(string, float) public void SetIKWeight(string bodyPart, float weight) Parameters bodyPart string weight float"
+  },
+  "api/vwgamedev.GameCreator.InteractiveMonoBehaviour.html": {
+    "href": "api/vwgamedev.GameCreator.InteractiveMonoBehaviour.html",
+    "title": "Class InteractiveMonoBehaviour | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InteractiveMonoBehaviour Namespace vwgamedev.GameCreator This Behaviour is meant to be inherited from any component that should be interactable by a character. It works like the MonoBehaviour, but with the additional functionality of being interactable. Please read the Documentation on GitHub for more information. public class InteractiveMonoBehaviour : MonoBehaviour, IInteractive, ISpatialHash Inheritance object InteractiveMonoBehaviour Implements IInteractive ISpatialHash Derived InteractiveVehicle Properties Args public Args Args { get; } Property Value Args CharacterBusy protected virtual bool CharacterBusy { get; } Property Value bool CharacterControllable protected virtual bool CharacterControllable { get; } Property Value bool CharacterIKPoints protected virtual Transform[] CharacterIKPoints { get; } Property Value Transform[] CharacterMount protected virtual bool CharacterMount { get; } Property Value bool CharacterStateMarkers protected virtual InteractiveStateMarker[] CharacterStateMarkers { get; } Property Value InteractiveStateMarker[] Methods GetCharacterIKPoints() public Transform[] GetCharacterIKPoints() Returns Transform[] InteractionStop() public void InteractionStop()"
+  },
+  "api/vwgamedev.GameCreator.InteractiveReflectionUtility.html": {
+    "href": "api/vwgamedev.GameCreator.InteractiveReflectionUtility.html",
+    "title": "Class InteractiveReflectionUtility | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InteractiveReflectionUtility Namespace vwgamedev.GameCreator public static class InteractiveReflectionUtility Inheritance object InteractiveReflectionUtility Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods GetMethodInHierarchy(object, string) public static MethodInfo GetMethodInHierarchy(object target, string methodName) Parameters target object methodName string Returns MethodInfo InvokeMethod(object, ref MethodInfo, string, params object[]) public static void InvokeMethod(object target, ref MethodInfo cachedMethod, string methodName, params object[] parameters) Parameters target object cachedMethod MethodInfo methodName string parameters object[]"
+  },
+  "api/vwgamedev.GameCreator.InteractiveStateMarker.html": {
+    "href": "api/vwgamedev.GameCreator.InteractiveStateMarker.html",
+    "title": "Class InteractiveStateMarker | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InteractiveStateMarker Namespace vwgamedev.GameCreator [Serializable] public class InteractiveStateMarker Inheritance object InteractiveStateMarker Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields marker public Marker marker Field Value Marker runConditionsList public RunConditionsList runConditionsList Field Value RunConditionsList state public State state Field Value State"
+  },
+  "api/vwgamedev.GameCreator.InteractiveUtility.html": {
+    "href": "api/vwgamedev.GameCreator.InteractiveUtility.html",
+    "title": "Class InteractiveUtility | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InteractiveUtility Namespace vwgamedev.GameCreator Those class provides some single threaded async awaitables. It will allow you to wait for various things and therefore make it easier to chain up complex tasks. Note: The Current most compatible way is to disable the CharacterController of the character while mounting and unmounting. This will prevent the charachter from moving on its own while we move the parent and it also prevents the character from going into airborn state. It will eliminate the possibility of RootMotion which is a big downsid. public static class InteractiveUtility Inheritance object InteractiveUtility Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods GetNearestStateMarker(InteractiveStateMarker[], Character, LayerMask) public static InteractiveStateMarker GetNearestStateMarker(InteractiveStateMarker[] characterStateMarkers, Character character, LayerMask layerMask) Parameters characterStateMarkers InteractiveStateMarker[] character Character layerMask LayerMask Returns InteractiveStateMarker WaitForEnterState(Character, State) public static Task WaitForEnterState(Character character, State state) Parameters character Character state State Returns Task WaitForExitState(Character, State) public static Task WaitForExitState(Character character, State state) Parameters character Character state State Returns Task WaitForFrames(int) public static Task WaitForFrames(int frames) Parameters frames int Returns Task WaitForInput(KeyCode) public static Task WaitForInput(KeyCode keyCode) Parameters keyCode KeyCode Returns Task WaitForInputAction(InputAction) public static Task WaitForInputAction(InputAction action) Parameters action InputAction Returns Task WaitForMount(Character, GameObject, float, ref CharacterMotionValues) Mounts the character to the marker and tweens from its current position to the markers position ( Player get local pos/rot zeroed ) After this we are safe to play any state or animation without being worried about the character being in the wrong position. Tweening also makes this process look smooth. public static Task WaitForMount(Character character, GameObject mountObject, float duration, ref CharacterMotionValues motionValues) Parameters character Character The character that should be mounted mountObject GameObject duration float The time the tween should take motionValues CharacterMotionValues The motion values of the character before mounting, we need to save them in a ref to restore them at unmount Returns Task WaitForNavigation(Character, Location, float) public static Task<bool> WaitForNavigation(Character character, Location location, float stopDistance = 0.1) Parameters character Character location Location stopDistance float Returns Task<bool> WaitForSeconds(float) public static Task WaitForSeconds(float seconds) Parameters seconds float Returns Task WaitForTween(GameObject, ITweenInput) Plays a tween and awaits its completion. public static Task WaitForTween(GameObject tweenTarget, ITweenInput tween) Parameters tweenTarget GameObject A Tween is running in a Coroutine and needs a GameObject to run on tween ITweenInput The Tween that should be played Returns Task WaitForUnmount(Character, float, CharacterMotionValues) The Unmount mehtod will unparent the character from the marker and restore its motion values. It will also tween the charachter back in a 0,*,0 rotation, as the charachter might have been rotated in the meantime, e.g. inside a car. public static Task WaitForUnmount(Character character, float duration, CharacterMotionValues motionValues) Parameters character Character The character that should be unmounted duration float The time the tween should take motionValues CharacterMotionValues The previous motion values of the character to restore Returns Task"
+  },
+  "api/vwgamedev.GameCreator.InteractiveVehicle.html": {
+    "href": "api/vwgamedev.GameCreator.InteractiveVehicle.html",
+    "title": "Class InteractiveVehicle | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Class InteractiveVehicle Namespace vwgamedev.GameCreator public class InteractiveVehicle : InteractiveMonoBehaviour, IInteractive, ISpatialHash Inheritance object InteractiveMonoBehaviour InteractiveVehicle Implements IInteractive ISpatialHash Inherited Members InteractiveMonoBehaviour.Args InteractiveMonoBehaviour.CharacterBusy InteractiveMonoBehaviour.CharacterControllable InteractiveMonoBehaviour.CharacterMount InteractiveMonoBehaviour.CharacterStateMarkers InteractiveMonoBehaviour.CharacterIKPoints InteractiveMonoBehaviour.InteractionStop() InteractiveMonoBehaviour.GetCharacterIKPoints() Fields RangeSlider public float RangeSlider Field Value float TestArray public Transform[] TestArray Field Value Transform[] TestGameObject public GameObject TestGameObject Field Value GameObject TestVector public Vector3 TestVector Field Value Vector3 ThisIsAField public string ThisIsAField Field Value string Methods OnFail(CancelReason) public void OnFail(CancelReason reason) Parameters reason CancelReason OnInteract(Character) public void OnInteract(Character character) Parameters character Character OnStop(Character) public void OnStop(Character character) Parameters character Character"
+  },
+  "api/vwgamedev.GameCreator.TweenTransform.html": {
+    "href": "api/vwgamedev.GameCreator.TweenTransform.html",
+    "title": "Struct TweenTransform | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Struct TweenTransform Namespace vwgamedev.GameCreator public struct TweenTransform Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Constructors TweenTransform(Transform) public TweenTransform(Transform transform) Parameters transform Transform TweenTransform(Vector3, Quaternion) public TweenTransform(Vector3 position, Quaternion rotation) Parameters position Vector3 rotation Quaternion Fields position public Vector3 position Field Value Vector3 rotation public Quaternion rotation Field Value Quaternion"
+  },
+  "api/vwgamedev.GameCreator.html": {
+    "href": "api/vwgamedev.GameCreator.html",
+    "title": "Namespace vwgamedev.GameCreator | GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "Namespace vwgamedev.GameCreator Classes InstructionInteractWithInteractive InstructionStopInteraction InstructionUnityAnimatorIKOverrideWeight InstructionUnityAnimatorIKSetIK InstructionUnityAnimatorIKUnsetIK InteractionIKRig InteractiveAnimator InteractiveMonoBehaviour This Behaviour is meant to be inherited from any component that should be interactable by a character. It works like the MonoBehaviour, but with the additional functionality of being interactable. Please read the Documentation on GitHub for more information. InteractiveReflectionUtility InteractiveStateMarker InteractiveUtility Those class provides some single threaded async awaitables. It will allow you to wait for various things and therefore make it easier to chain up complex tasks. Note: The Current most compatible way is to disable the CharacterController of the character while mounting and unmounting. This will prevent the charachter from moving on its own while we move the parent and it also prevents the character from going into airborn state. It will eliminate the possibility of RootMotion which is a big downsid. InteractiveVehicle Structs CharacterMotionValues TweenTransform Enums CancelReason IKGoal"
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "| GameCreator Interactivity Extension | 0.3.0",
+    "keywords": "This page redirects to the manual."
+  }
+}
